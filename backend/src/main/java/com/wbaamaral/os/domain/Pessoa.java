@@ -1,5 +1,6 @@
 package com.wbaamaral.os.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import org.hibernate.validator.constraints.br.CPF;
@@ -10,8 +11,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public abstract class Pessoa {
-
+public abstract class Pessoa  implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -28,7 +31,7 @@ public abstract class Pessoa {
 
 	public Pessoa(Long id, String nome, String cpf, String telefone) {
 		super();
-		this.id = id;
+//		this.id = (id == null ? 0L : id);
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;

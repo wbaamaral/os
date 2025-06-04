@@ -45,11 +45,11 @@ public class Os {
 		this.setStatus(Status.ABERTO);
 	}
 
-	public Os(Long id, LocalDateTime dataAbertura, 
+	public Os(Long id,  
 			Prioridade prioridade, String observacoes,
 			Status status, Tecnico tecnico, Cliente cliente) {
 		super();
-		this.id = id;
+//		this.id = (id == null ? 0L : id);
 		this.setDataAbertura(LocalDateTime.now());
 		this.prioridade = (prioridade == null) ? 0 : prioridade.getCod();
 		this.observacoes = observacoes;
