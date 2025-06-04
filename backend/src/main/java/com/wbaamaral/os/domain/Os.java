@@ -3,18 +3,39 @@ package com.wbaamaral.os.domain;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wbaamaral.os.domain.enuns.Prioridade;
 import com.wbaamaral.os.domain.enuns.Status;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class Os {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dataAbertura;
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dataFechamento;
 	private Integer prioridade;
 	private String observacoes;
 	private Integer status;
+	
+	@ManyToOne()
+	@JoinColumn(name = "tecnico_id" )
 	private Tecnico tecnico;
+	
+	@ManyToOne()
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
 	public Os() {
