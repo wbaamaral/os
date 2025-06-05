@@ -1,39 +1,32 @@
-package com.wbaamaral.os.domain;
+package com.wbaamaral.os.dtos;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.wbaamaral.os.domain.Tecnico;
 
-@Entity
-public abstract class Pessoa  implements Serializable{
-	
+public class TecnicoDTO implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private Long id;
-
 	private String nome;
-
 	@CPF
 	private String cpf;
 	private String telefone;
 
-	public Pessoa() {
+	public TecnicoDTO() {
 		super();
 	}
 
-	public Pessoa( String nome, String cpf, String telefone) {
+	public TecnicoDTO(Tecnico obj) {
 		super();
-		this.nome = nome;
-		this.cpf = cpf;
-		this.telefone = telefone;
+		this.id = obj.getId();
+		this.nome = obj.getNome();
+		this.cpf = obj.getCpf();
+		this.telefone = obj.getTelefone();
 	}
 
 	public Long getId() {
@@ -70,7 +63,7 @@ public abstract class Pessoa  implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cpf, id);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -81,8 +74,9 @@ public abstract class Pessoa  implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pessoa other = (Pessoa) obj;
-		return Objects.equals(cpf, other.cpf) && Objects.equals(id, other.id);
+		TecnicoDTO other = (TecnicoDTO) obj;
+		return Objects.equals(id, other.id);
 	}
+
 
 }
