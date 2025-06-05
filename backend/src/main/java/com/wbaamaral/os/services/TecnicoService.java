@@ -13,11 +13,13 @@ public class TecnicoService {
 
 	@Autowired
 	private TecnicoRepository tecnicoRepository;
-	
+
 	public Tecnico findById(Long id) {
-		
-	  Optional<Tecnico>	obj =  tecnicoRepository.findById(id);
-	  
-	  return obj.orElse(null);
+
+		Optional<Tecnico> obj = tecnicoRepository.findById(id);
+
+		return obj.orElseThrow(
+				() -> new ObjectNotFoundException("Técnico não encontrado! ID: " + id +
+						", Tipo: " + Tecnico.class.getName()));
 	}
 }

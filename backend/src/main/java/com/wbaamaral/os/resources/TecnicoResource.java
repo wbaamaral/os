@@ -16,11 +16,11 @@ public class TecnicoResource {
 
 	@Autowired
 	private TecnicoService service;
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<TecnicoDTO>  findById(@PathVariable Long id ){
+	public ResponseEntity<TecnicoDTO> findById(@PathVariable Long id) {
 		TecnicoDTO obj = new TecnicoDTO(service.findById(id));
-		
+
 		return ResponseEntity.ok().body(obj);
 	}
 }
