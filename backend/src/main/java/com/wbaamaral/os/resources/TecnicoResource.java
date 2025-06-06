@@ -18,6 +18,8 @@ import com.wbaamaral.os.domain.Tecnico;
 import com.wbaamaral.os.dtos.TecnicoDTO;
 import com.wbaamaral.os.services.TecnicoService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/tecnicos")
 public class TecnicoResource {
@@ -25,6 +27,9 @@ public class TecnicoResource {
 	@Autowired
 	private TecnicoService service;
 
+	/*
+	 * Busca pelo tecnico pelo ID
+	 */
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<TecnicoDTO> findById(@PathVariable Long id) {
 		TecnicoDTO obj = new TecnicoDTO(service.findById(id));
@@ -32,6 +37,9 @@ public class TecnicoResource {
 		return ResponseEntity.ok().body(obj);
 	}
 
+	/*
+	 * Busca uma lista contendo todos os tecnicos da base de dados
+	 */
 	@GetMapping
 	public ResponseEntity<List<TecnicoDTO>> findAll() {
 
@@ -42,8 +50,11 @@ public class TecnicoResource {
 
 	}
 
+	/*
+	 * Cria um novo Tecnico
+	 */
 	@PostMapping
-	public ResponseEntity<TecnicoDTO> create(@RequestBody TecnicoDTO tecnicoDTO) {
+	public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO tecnicoDTO) {
 
 		Tecnico newObj = service.create(tecnicoDTO);
 
