@@ -1,4 +1,4 @@
-package com.wbaamaral.os.services;
+package com.wbaamaral.os.services.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {
 
