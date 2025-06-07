@@ -8,7 +8,6 @@ import com.wbaamaral.os.domain.enuns.Prioridade;
 import com.wbaamaral.os.domain.enuns.Status;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
