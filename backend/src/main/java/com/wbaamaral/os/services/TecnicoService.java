@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wbaamaral.os.domain.Pessoa;
 import com.wbaamaral.os.domain.Tecnico;
 import com.wbaamaral.os.dtos.TecnicoDTO;
+import com.wbaamaral.os.repositores.PessoaRepository;
 import com.wbaamaral.os.repositores.TecnicoRepository;
 import com.wbaamaral.os.services.exceptions.DataIntegratyViolationException;
 import com.wbaamaral.os.services.exceptions.ObjectNotFoundException;
@@ -18,9 +20,12 @@ public class TecnicoService {
 	@Autowired
 	private TecnicoRepository tecnicoRepository;
 
-	private Tecnico findByCPF(TecnicoDTO objDTO) {
+	@Autowired
+	private PessoaRepository pessoaRepository;
 
-		Tecnico obj = tecnicoRepository.findByCPF(objDTO.getCpf());
+	private Pessoa findByCPF(TecnicoDTO objDTO) {
+
+		Pessoa obj = pessoaRepository.findByCPF(objDTO.getCpf());
 		if (obj != null) {
 			return obj;
 		}
@@ -53,7 +58,7 @@ public class TecnicoService {
 
 	public Tecnico update(Long id, TecnicoDTO updObj) {
 		Tecnico oldObj = findById(id);
-		Tecnico objCPF = findByCPF(updObj);
+		Pessoa objCPF = findByCPF(updObj);
 
 		if (objCPF != null && !(objCPF.getCpf().equals(oldObj.getCpf()))) {
 			throw new DataIntegratyViolationException("CPF já cadastrado na base de dados!");
