@@ -16,50 +16,49 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.wbaamaral.os.domain.Tecnico;
+import com.wbaamaral.os.domain.Cliente;
 import com.wbaamaral.os.dtos.ClienteDTO;
-import com.wbaamaral.os.dtos.TecnicoDTO;
-import com.wbaamaral.os.services.TecnicoService;
+import com.wbaamaral.os.services.ClienteService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/tecnicos")
-public class TecnicoResource {
+@RequestMapping(value = "/clientes")
+public class ClienteResource {
 
 	@Autowired
-	private TecnicoService service;
+	private ClienteService service;
 
 	/*
 	 * Busca pelo tecnico pelo ID
 	 */
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<TecnicoDTO> findById(@PathVariable Long id) {
-		TecnicoDTO obj = new TecnicoDTO(service.findById(id));
+	public ResponseEntity<ClienteDTO> findById(@PathVariable Long id) {
+		ClienteDTO obj = new ClienteDTO(service.findById(id));
 
 		return ResponseEntity.ok().body(obj);
 	}
 
 	/*
-	 * Busca uma lista contendo todos os tecnicos da base de dados
+	 * Busca uma lista contendo todos os clientes da base de dados
 	 */
 	@GetMapping
-	public ResponseEntity<List<TecnicoDTO>> findAll() {
+	public ResponseEntity<List<ClienteDTO>> findAll() {
 
-		List<TecnicoDTO> tecnicoDTO = service.findAll().stream().map(obj -> new TecnicoDTO(obj))
+		List<ClienteDTO> clienteDTO = service.findAll().stream().map(obj -> new ClienteDTO(obj))
 				.collect((Collectors.toList()));
 
-		return ResponseEntity.ok().body(tecnicoDTO);
+		return ResponseEntity.ok().body(clienteDTO);
 
 	}
 
 	/*
-	 * Cria um novo Tecnico
+	 * Cria um novo Cliente
 	 */
 	@PostMapping
-	public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody ClienteDTO tecnicoDTO) {
+	public ResponseEntity<ClienteDTO> create(@Valid @RequestBody ClienteDTO clienteDTO) {
 
-		Tecnico newObj = service.create(tecnicoDTO);
+		Cliente newObj = service.create(clienteDTO);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 
@@ -67,11 +66,11 @@ public class TecnicoResource {
 	}
 
 	/*
-	 * Atualizar dados de técnicos
+	 * Atualizar dados de cliente
 	 */
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<TecnicoDTO> update(@PathVariable Long id, @Valid @RequestBody ClienteDTO tecnico) {
-		TecnicoDTO tecnicoDTO = new TecnicoDTO(service.update(id, tecnico));
+	public ResponseEntity<ClienteDTO> update(@PathVariable Long id, @Valid @RequestBody ClienteDTO tecnico) {
+		ClienteDTO tecnicoDTO = new ClienteDTO(service.update(id, tecnico));
 
 		return ResponseEntity.ok().body(tecnicoDTO);
 	}
@@ -79,7 +78,7 @@ public class TecnicoResource {
 	/*
 	 * Deletar técnico
 	 */
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping(value =  "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 
