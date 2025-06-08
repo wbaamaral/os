@@ -1,5 +1,6 @@
 package com.wbaamaral.os.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -15,7 +16,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Os {
+public class Os implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,7 +53,6 @@ public class Os {
 			Prioridade prioridade, String observacoes,
 			Status status, Tecnico tecnico, Cliente cliente) {
 		super();
-//		this.id = (id == null ? 0L : id);
 		this.setDataAbertura(LocalDateTime.now());
 		this.prioridade = (prioridade == null) ? 0 : prioridade.getCod();
 		this.observacoes = observacoes;
