@@ -1,5 +1,6 @@
 package com.wbaamaral.os.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,9 @@ public class OsService {
 		Optional<Os> obj = repository.findById(id);
 
 		return obj.orElseThrow(() -> new ObjectNotFoundException("OS não encontrada! ID: " + id + Os.class.getName()));
+	}
+	
+	public List<Os> findAll(){
+		return repository.findAll();
 	}
 }
