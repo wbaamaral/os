@@ -30,6 +30,7 @@ public class OsDTO implements Serializable {
 	private Integer status;
 	private Long tecnico;
 	private Long cliente;
+	
 	public OsDTO() {
 		super();
 		this.setDataAbertura(LocalDateTime.now());

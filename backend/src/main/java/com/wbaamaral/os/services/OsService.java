@@ -1,6 +1,7 @@
 package com.wbaamaral.os.services;
 
 import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,15 @@ public class OsService {
 	@Autowired
 	private TecnicoService tecnicoSrv;
 
+	OsService(DBService DBService) {
+	}
+
 	private Os fromDTO(@Valid OsDTO obj) {
 		Os ordemServico = new Os();
+		ordemServico.setId(obj.getId());
 		ordemServico.setObservacoes(obj.getObservacoes());
+		ordemServico.setDataAbertura(obj.getDataAbertura());
+		
 		ordemServico.setPrioridade(Prioridade.toEnum(obj.getPrioridade()));
 		ordemServico.setStatus(Status.toEnum(obj.getStatus()));
 
@@ -41,6 +48,13 @@ public class OsService {
 		ordemServico.setCliente(cli);
 		ordemServico.setTecnico(tec);
 
+		if (ordemServico.getStatus().getCod().equals(2)) {
+			
+			ordemServico.setDataFechamento(LocalDateTime.now());
+		
+			System.out.println("\nStatus OS: " + ordemServico.getStatus() +"\n"+ ordemServico.getDataFechamento());
+		}
+		
 		return ordemServico;
 	}
 
@@ -58,6 +72,14 @@ public class OsService {
 		Os saveOS = fromDTO(obj);
 
 		return repository.save(saveOS);
+	}
+
+	public Os update(@Valid OsDTO obj) {
+		findById(obj.getId());
+
+		Os ordemdeServico = fromDTO(obj);
+		
+		return repository.save(ordemdeServico);
 	}
 
 }

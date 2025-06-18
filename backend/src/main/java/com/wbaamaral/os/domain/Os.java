@@ -28,8 +28,10 @@ public class Os implements Serializable {
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dataAbertura;
+	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dataFechamento;
+	
 	private Integer prioridade;
 	private String observacoes;
 	private Integer status;
@@ -53,6 +55,7 @@ public class Os implements Serializable {
 			Prioridade prioridade, String observacoes,
 			Status status, Tecnico tecnico, Cliente cliente) {
 		super();
+		
 		this.setDataAbertura(LocalDateTime.now());
 		this.prioridade = (prioridade == null) ? 0 : prioridade.getCod();
 		this.observacoes = observacoes;
