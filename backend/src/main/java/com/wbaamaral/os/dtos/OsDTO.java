@@ -6,8 +6,6 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wbaamaral.os.domain.Os;
-import com.wbaamaral.os.domain.enuns.Prioridade;
-import com.wbaamaral.os.domain.enuns.Status;
 
 import jakarta.validation.constraints.NotEmpty;
 
@@ -33,15 +31,13 @@ public class OsDTO implements Serializable {
 	
 	public OsDTO() {
 		super();
-		this.setDataAbertura(LocalDateTime.now());
-		this.setPrioridade(Prioridade.BAIXA.getCod());
-		this.setStatus(Status.ABERTO.getCod());
 	}
 
 	public OsDTO(Os obj) {
 		super();
 		this.id = obj.getId();
-		this.setDataAbertura(obj.getDataAbertura());
+		this.dataAbertura = obj.getDataAbertura();
+		this.dataFechamento = obj.getDataFechamento();
 		this.prioridade = obj.getPrioridade().getCod();
 		this.observacoes = obj.getObservacoes();
 		this.status = obj.getStatus().getCod();

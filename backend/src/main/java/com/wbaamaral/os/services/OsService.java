@@ -52,7 +52,6 @@ public class OsService {
 			
 			ordemServico.setDataFechamento(LocalDateTime.now());
 		
-			System.out.println("\nStatus OS: " + ordemServico.getStatus() +"\n"+ ordemServico.getDataFechamento());
 		}
 		
 		return ordemServico;
